@@ -11,6 +11,20 @@ Pattern matching
 
 Regular expressions and text scanning
 
+Example
+-------
 ```php
+use text\regex\Pattern;
 
+$pattern= Pattern::compile('([w]{3}\.)?example\.(com|net|org)');
+if ($pattern->matches($input)) {
+  // Looks like an example domain
+}
+
+$result= $pattern->match($input);
+$group= $result->group(0);  // [ "www.example.com", "www.", "www", "com" ]
 ```
+
+Further reading
+---------------
+* [RFC #165: New text.regex package](https://github.com/xp-framework/rfc/issues/165)
