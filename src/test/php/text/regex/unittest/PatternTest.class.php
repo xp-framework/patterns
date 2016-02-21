@@ -37,29 +37,6 @@ class PatternTest extends \unittest\TestCase {
     $this->assertEquals(2, Pattern::compile('.')->match('ab')->length());
   }
 
-  #[@test, @action(new RuntimeVersion('<7.0.0-dev'))]
-  public function stringObjectInput() {
-    $this->assertEquals(0, Pattern::compile('.')->match(new \lang\types\String(''))->length());
-    $this->assertEquals(1, Pattern::compile('.')->match(new \lang\types\String('a'))->length());
-    $this->assertEquals(2, Pattern::compile('.')->match(new \lang\types\String('ab'))->length());
-  }
-
-  #[@test, @action(new RuntimeVersion('<7.0.0-dev'))]
-  public function unicodePattern() {
-    $this->assertEquals(
-      ['GÃ¼n'],
-      Pattern::compile('.Ã¼.', Pattern::UTF8)->match(new \lang\types\String('Günter', 'iso-8859-1'))->group(0)
-    );
-  }
-
-  #[@test, @action(new RuntimeVersion('<7.0.0-dev'))]
-  public function nonUnicodePattern() {
-    $this->assertEquals(
-      ['Gün'],
-      Pattern::compile('.ü.')->match(new \lang\types\String('Günter', 'iso-8859-1'))->group(0)
-    );
-  }
-
   #[@test]
   public function caseInsensitive() {
     $this->assertEquals(
@@ -190,15 +167,6 @@ class PatternTest extends \unittest\TestCase {
     $this->assertEquals(
       'Hello World with far too much whitespace',
       $pattern->replaceWith(' ', 'Hello  World     with   far too    much whitespace')
-    );
-  }
-
-  #[@test, @action(new RuntimeVersion('<7.0.0-dev'))]
-  public function unicodeReplacement() {
-    $pattern= Pattern::compile('<[\p{L}]>', Pattern::UTF8);
-    $this->assertEquals(
-      'G.nter',
-      $pattern->replaceWith('.', new \lang\types\String('G<ü>nter', 'iso-8859-1'))
     );
   }
 
