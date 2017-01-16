@@ -3,6 +3,12 @@ Pattern matching changelog
 
 ## ?.?.? / ????-??-??
 
+## 7.1.1 / 2017-01-16
+
+* Added BC for PHP 7.2: Empty optional patterns should not be NULLed
+  See https://bugs.php.net/bug.php?id=73947
+  (@thekid) 
+
 ## 7.1.0 / 2016-08-29
 
 * Added version compatibility with XP 8 - @thekid

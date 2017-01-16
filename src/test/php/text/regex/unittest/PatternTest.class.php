@@ -202,4 +202,12 @@ class PatternTest extends \unittest\TestCase {
   public function stringCastWithFlags() {
     $this->assertEquals('/end$/iU', (string)new Pattern('end$', Pattern::CASE_INSENSITIVE | Pattern::UNGREEDY));
   }
+
+  #[@test]
+  public function php_bug_73947() {
+    $this->assertEquals(
+      ['http://domain', 'http', '', 'domain'],
+      Pattern::compile('([a-z]+)://([^@]+@)?([a-z]+)')->match('http://domain')->group(0)
+    );
+  }
 }

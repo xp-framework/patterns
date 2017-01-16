@@ -25,7 +25,15 @@ class MatchResult extends \lang\Object {
    */
   public function __construct($length, $matches) {
     $this->length= $length;
-    $this->matches= $matches;
+
+    // Ensure empty patterns are not NULLed to ensure BC.
+    // See https://bugs.php.net/bug.php?id=73947
+    foreach ($matches as $group => $match) {
+      $this->matches[$group]= [];
+      foreach ($match as $i => $segment) {
+        $this->matches[$group][$i]= (string)$segment;
+      }
+    }
   }
   
   /**
