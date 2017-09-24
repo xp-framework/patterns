@@ -3,6 +3,11 @@ Pattern matching changelog
 
 ## ?.?.? / ????-??-??
 
+## 8.0.0 / 2017-09-24
+
+* **Heads up**: Dropped PHP 5.5 support - @thekid
+* Added compatibility with XP 9.0+ - @thekid
+
 ## 7.1.1 / 2017-01-16
 
 * Added BC for PHP 7.2: Empty optional patterns should not be NULLed
