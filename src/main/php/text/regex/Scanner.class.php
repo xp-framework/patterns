@@ -9,7 +9,7 @@ use lang\FormatException;
  * @see      php://sscanf
  * @see      http://www.kernel.org/doc/man-pages/online/pages/man3/scanf.3.html 
  */
-class Scanner extends \lang\Object implements Matcher {
+class Scanner implements Matcher {
   protected $pattern= [];
   
   /**

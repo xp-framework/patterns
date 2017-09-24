@@ -1,12 +1,14 @@
 <?php namespace text\regex;
 
+use util\Objects;
+
 /**
  * Represents a regular expression pattern
  *
  * @test  xp://net.xp_framework.unittest.text.PatternTest
  * @see   php://preg
  */
-class Pattern extends \lang\Object implements Matcher {
+class Pattern implements Matcher, \lang\Value {
   const 
     CASE_INSENSITIVE = 0x0001,
     MULTILINE        = 0x0002,
@@ -68,13 +70,13 @@ class Pattern extends \lang\Object implements Matcher {
   }
 
   /**
-   * Returns whether a given object is equal to this
+   * Compares this result to another value
    *
-   * @param   lang.Generic cmp
-   * @return  bool
+   * @param   var $value
+   * @return  int
    */
-  public function equals($cmp) {
-    return $cmp instanceof self && $cmp->regex === $this->regex;
+  public function compareTo($value) {
+    return $value instanceof self ? Objects::compare($this->regex, $value->regex) : 1;
   }
 
   /**

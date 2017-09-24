@@ -1,7 +1,5 @@
 <?php namespace text\regex;
 
-
-
 /**
  * POSIX character class
  *
@@ -9,7 +7,7 @@
  * @see      http://en.wikipedia.org/wiki/Regular_expression
  * @test     xp://net.xp_framework.unittest.text.CharacterClassTest
  */
-class CharacterClass extends \lang\Object {
+class CharacterClass {
   public static 
     $ALNUM, 
     $WORD, 

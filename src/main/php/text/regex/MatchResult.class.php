@@ -1,13 +1,14 @@
 <?php namespace text\regex;
 
 use lang\IndexOutOfBoundsException;
+use util\Objects;
 
 /**
  * Represents a match result
  *
  * @see   xp://text.regex.Pattern#matches
  */
-class MatchResult extends \lang\Object {
+class MatchResult implements \lang\Value {
   protected $length  = 0;
   protected $matches = [];
   
@@ -55,6 +56,15 @@ class MatchResult extends \lang\Object {
   }
 
   /**
+   * Creates a hash code for this object
+   *
+   * @return  string
+   */
+  public function hashCode() {
+    return 'M'.($this->matches ? Objects::hashOf($this->matches) : '0');
+  }
+
+  /**
    * Creates a string representation of this object
    *
    * @return  string
@@ -78,16 +88,15 @@ class MatchResult extends \lang\Object {
   }
   
   /**
-   * Returns whether an object is equal to this match result.
+   * Compares this result to another value
    *
-   * @param   lang.Generic cmp
-   * @return  bool
+   * @param   var $value
+   * @return  int
    */
-  public function equals($cmp) {
-    return (
-      $cmp instanceof self && 
-      $cmp->length === $this->length && 
-      $cmp->matches === $this->matches
-    );
+  public function compareTo($value) {
+    return $cmp instanceof self
+      ? Objects::compare([$this->length, $this->matches], [$value->length, $value->matches])
+      : 1
+    ;
   }
 }
