@@ -1,7 +1,7 @@
 <?php namespace text\regex;
 
-use lang\IllegalArgumentException;
 use lang\FormatException;
+use lang\IllegalArgumentException;
 
 /**
  * Scanner
@@ -21,11 +21,11 @@ class Scanner implements Matcher {
   public function __construct($pattern) {
     $this->pattern= [];
     for ($i= 0, $s= strlen($pattern); $i < $s; $i++) {
-      if ('%' === $pattern{$i}) {
+      if ('%' === $pattern[$i]) {
         if (++$i >= $s) {
           throw new IllegalArgumentException('Not enough input at position '.($i - 1));
         }
-        switch ($pattern{$i}) {
+        switch ($pattern[$i]) {
           case '%': $this->pattern[]= '20%'; break; 
           case 'd': $this->pattern[]= '11+-0123456789'; break;
           case 'x': $this->pattern[]= '11x0123456789abcdefABCDEF'; break;
@@ -34,22 +34,22 @@ class Scanner implements Matcher {
           case '[': {   // [^a-z]: everything except a-z, [a-z]: only a-z, []01]: only "[", "0" and "1"
             if ($i+ 1 >= $s) {
               throw new FormatException('Unmatched "]" in format string');
-            } else if ('^' === $pattern{$i+ 1}) {
+            } else if ('^' === $pattern[$i + 1]) {
               $match= '01';
               $i++;
             } else {
               $match= '11';
             }
-            if (false === ($p= strpos($pattern, ']', $i + (']' === $pattern{$i+ 1} ? 2 : 0)))) {
+            if (false === ($p= strpos($pattern, ']', $i + (']' === $pattern[$i + 1] ? 2 : 0)))) {
               throw new FormatException('Unmatched "]" in format string');
             }
             $seq= substr($pattern, $i+ 1, $p- $i- 1);
             for ($j= 0, $t= strlen($seq); $j < $t; $j++) {
-              if ($j < $t - 2 && '-' === $seq{$j+ 1}) {
-                $match.= implode('', range($seq{$j}, $seq{$j+ 2}));
+              if ($j < $t - 2 && '-' === $seq[$j + 1]) {
+                $match.= implode('', range($seq[$j], $seq[$j + 2]));
                 $j+= 2;
               } else {
-                $match.= $seq{$j};
+                $match.= $seq[$j];
               }
             }
             $this->pattern[]= $match;
@@ -57,7 +57,7 @@ class Scanner implements Matcher {
             break;
           }
           default: {
-            throw new FormatException('Bad scan character "'.$pattern{$i}.'"');
+            throw new FormatException('Bad scan character "'.$pattern[$i].'"');
           }
         }
       } else {
