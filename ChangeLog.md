@@ -3,6 +3,10 @@ Pattern matching changelog
 
 ## ?.?.? / ????-??-??
 
+## 8.0.2 / 2020-04-05
+
+* Fix "undefined variable $cmd" - @thekid
+
 ## 8.0.1 / 2020-04-04
 
 * Made compatible with XP 10 - @thekid

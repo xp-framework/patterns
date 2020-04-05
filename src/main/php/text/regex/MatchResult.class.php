@@ -1,6 +1,7 @@
 <?php namespace text\regex;
 
 use lang\IndexOutOfBoundsException;
+use lang\Value;
 use util\Objects;
 
 /**
@@ -8,7 +9,7 @@ use util\Objects;
  *
  * @see   xp://text.regex.Pattern#matches
  */
-class MatchResult implements \lang\Value {
+class MatchResult implements Value {
   protected $length  = 0;
   protected $matches = [];
   
@@ -94,7 +95,7 @@ class MatchResult implements \lang\Value {
    * @return  int
    */
   public function compareTo($value) {
-    return $cmp instanceof self
+    return $value instanceof self
       ? Objects::compare([$this->length, $this->matches], [$value->length, $value->matches])
       : 1
     ;

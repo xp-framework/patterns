@@ -1,16 +1,17 @@
 <?php namespace text\regex\unittest;
 
-use text\regex\Pattern;
-use unittest\actions\RuntimeVersion;
 use lang\FormatException;
 use lang\IndexOutOfBoundsException;
+use text\regex\Pattern;
+use unittest\TestCase;
+use unittest\actions\RuntimeVersion;
 
 /**
  * Pattern test 
  *
  * @see   http://www.regular-expressions.info/unicode.html
  */
-class PatternTest extends \unittest\TestCase {
+class PatternTest extends TestCase {
 
   #[@test]
   public function length() {
