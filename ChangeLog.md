@@ -5,7 +5,8 @@ Pattern matching changelog
 
 ## 8.0.2 / 2020-04-05
 
-* Fix "undefined variable $cmd" - @thekid
+* Fix "Undefined variable $cmp" when comparing `MatchResult` instances
+  (@thekid)
 
 ## 8.0.1 / 2020-04-04
 
