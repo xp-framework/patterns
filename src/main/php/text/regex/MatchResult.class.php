@@ -1,7 +1,6 @@
 <?php namespace text\regex;
 
-use lang\IndexOutOfBoundsException;
-use lang\Value;
+use lang\{IndexOutOfBoundsException, Value};
 use util\Objects;
 
 /**

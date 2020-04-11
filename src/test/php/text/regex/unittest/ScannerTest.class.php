@@ -1,10 +1,10 @@
 <?php namespace text\regex\unittest;
 
-use text\regex\Scanner;
-use text\regex\CharacterClass;
 use lang\FormatException;
+use text\regex\{CharacterClass, Scanner};
+use unittest\TestCase;
 
-class ScannerTest extends \unittest\TestCase {
+class ScannerTest extends TestCase {
 
   #[@test]
   public function int() {
@@ -122,6 +122,6 @@ class ScannerTest extends \unittest\TestCase {
 
   #[@test, @expect(FormatException::class)]
   public function unknownScanCharacter() {
-    new Scanner('%Ü');
+    new Scanner('%@');
   }
 }

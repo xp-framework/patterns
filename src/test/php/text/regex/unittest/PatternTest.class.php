@@ -1,7 +1,6 @@
 <?php namespace text\regex\unittest;
 
-use lang\FormatException;
-use lang\IndexOutOfBoundsException;
+use lang\{FormatException, IndexOutOfBoundsException};
 use text\regex\Pattern;
 use unittest\TestCase;
 use unittest\actions\RuntimeVersion;

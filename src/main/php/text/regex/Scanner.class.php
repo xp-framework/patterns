@@ -1,7 +1,6 @@
 <?php namespace text\regex;
 
-use lang\FormatException;
-use lang\IllegalArgumentException;
+use lang\{FormatException, IllegalArgumentException};
 
 /**
  * Scanner

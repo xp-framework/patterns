@@ -1,7 +1,7 @@
 <?php namespace text\regex\unittest;
 
-use unittest\TestCase;
 use text\regex\CharacterClass;
+use unittest\TestCase;
 
 /**
  * TestCase
