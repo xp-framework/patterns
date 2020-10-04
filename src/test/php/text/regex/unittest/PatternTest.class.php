@@ -2,8 +2,8 @@
 
 use lang\{FormatException, IndexOutOfBoundsException};
 use text\regex\Pattern;
-use unittest\TestCase;
 use unittest\actions\RuntimeVersion;
+use unittest\{Expect, Test, TestCase};
 
 /**
  * Pattern test 
@@ -12,7 +12,7 @@ use unittest\actions\RuntimeVersion;
  */
 class PatternTest extends TestCase {
 
-  #[@test]
+  #[Test]
   public function length() {
     $this->assertEquals(
       0, 
@@ -20,24 +20,24 @@ class PatternTest extends TestCase {
     );
   }
 
-  #[@test]
+  #[Test]
   public function isMatched() {
     $this->assertTrue(Pattern::compile('a+')->matches('aaa'));
   }
 
-  #[@test]
+  #[Test]
   public function isNotMatched() {
     $this->assertFalse(Pattern::compile('a+')->matches('bbb'));
   }
 
-  #[@test]
+  #[Test]
   public function stringPrimitiveInput() {
     $this->assertEquals(0, Pattern::compile('.')->match('')->length());
     $this->assertEquals(1, Pattern::compile('.')->match('a')->length());
     $this->assertEquals(2, Pattern::compile('.')->match('ab')->length());
   }
 
-  #[@test]
+  #[Test]
   public function caseInsensitive() {
     $this->assertEquals(
       1, 
@@ -45,7 +45,7 @@ class PatternTest extends TestCase {
     );
   }
 
-  #[@test]
+  #[Test]
   public function groups() {
     $this->assertEquals(
       [['Hello']],
@@ -53,7 +53,7 @@ class PatternTest extends TestCase {
     );
   }
 
-  #[@test]
+  #[Test]
   public function groupsWithOneMatch() {
     $this->assertEquals(
       [['www.example.com', 'www.', 'www', 'com']],
@@ -61,7 +61,7 @@ class PatternTest extends TestCase {
     );
   }
 
-  #[@test]
+  #[Test]
   public function groupsWithMultipleMatches() {
     $this->assertEquals(
       [
@@ -72,7 +72,7 @@ class PatternTest extends TestCase {
     );
   }
 
-  #[@test]
+  #[Test]
   public function group() {
     $this->assertEquals(
       ['Hello'],
@@ -80,7 +80,7 @@ class PatternTest extends TestCase {
     );
   }
 
-  #[@test]
+  #[Test]
   public function groupWithOneMatch() {
     $this->assertEquals(
       ['www.example.com', 'www.', 'www', 'com'],
@@ -88,7 +88,7 @@ class PatternTest extends TestCase {
     );
   }
 
-  #[@test]
+  #[Test]
   public function groupWithMultipleMatches() {
     $match= Pattern::compile('(([w]{3})\.)?example\.(com|net|org)')->match('www.example.com and example.org');
     $this->assertEquals(
@@ -101,17 +101,17 @@ class PatternTest extends TestCase {
     );
   }
 
-  #[@test, @expect(IndexOutOfBoundsException::class)]
+  #[Test, Expect(IndexOutOfBoundsException::class)]
   public function nonExistantGroup() {
     Pattern::compile('H[ea]llo')->match('Hello')->group(1);
   }
 
-  #[@test]
+  #[Test]
   public function matchEmptyString() {
     $this->assertEquals([], Pattern::compile('.')->match('')->groups());
   }
 
-  #[@test]
+  #[Test]
   public function equality() {
     $this->assertEquals(
       Pattern::compile('[a-z]+'),
@@ -119,7 +119,7 @@ class PatternTest extends TestCase {
     );
   }
 
-  #[@test]
+  #[Test]
   public function unequality() {
     $this->assertNotEquals(
       Pattern::compile('[a-z]+', Pattern::CASE_INSENSITIVE),
@@ -127,7 +127,7 @@ class PatternTest extends TestCase {
     );
   }
 
-  #[@test]
+  #[Test]
   public function stringRepresentation() {
     $this->assertEquals(
       'text.regex.Pattern</[a-z]+/i>',
@@ -135,12 +135,12 @@ class PatternTest extends TestCase {
     );
   }
 
-  #[@test, @expect(FormatException::class)]
+  #[Test, Expect(FormatException::class)]
   public function illegalPattern() {
     Pattern::compile('(');
   }
 
-  #[@test]
+  #[Test]
   public function lazyCompilation() {
     $p= new Pattern('(');
     try {
@@ -151,7 +151,7 @@ class PatternTest extends TestCase {
     }
   }
 
-  #[@test]
+  #[Test]
   public function multilineDotAll() {
     $m= Pattern::compile('BEGIN {(.+)}', Pattern::MULTILINE | Pattern::DOTALL)->match('BEGIN {
       print "Hello World";
@@ -161,7 +161,7 @@ class PatternTest extends TestCase {
     $this->assertEquals('print "Hello World";', trim($group[1]));
   }
 
-  #[@test]
+  #[Test]
   public function replaceWhitespace() {
     $pattern= Pattern::compile('\s+');
     $this->assertEquals(
@@ -170,7 +170,7 @@ class PatternTest extends TestCase {
     );
   }
 
-  #[@test]
+  #[Test]
   public function replaceWithDollarBackReference() {
     $pattern= Pattern::compile('H[ae]ll[oO0]');
     $this->assertEquals(
@@ -179,7 +179,7 @@ class PatternTest extends TestCase {
     );
   }
 
-  #[@test]
+  #[Test]
   public function replaceWithDollarBackReferences() {
     $quoter= Pattern::compile('([^=]+)=([^ >]+)([ >]*)');
     $this->assertEquals(
@@ -188,22 +188,22 @@ class PatternTest extends TestCase {
     );
   }
 
-  #[@test]
+  #[Test]
   public function stringCast() {
     $this->assertEquals('/^begin/', (string)new Pattern('^begin'));
   }
 
-  #[@test]
+  #[Test]
   public function stringCastWithFlag() {
     $this->assertEquals('/end$/i', (string)new Pattern('end$', Pattern::CASE_INSENSITIVE));
   }
 
-  #[@test]
+  #[Test]
   public function stringCastWithFlags() {
     $this->assertEquals('/end$/iU', (string)new Pattern('end$', Pattern::CASE_INSENSITIVE | Pattern::UNGREEDY));
   }
 
-  #[@test]
+  #[Test]
   public function php_bug_73947() {
     $this->assertEquals(
       ['http://domain', 'http', '', 'domain'],
