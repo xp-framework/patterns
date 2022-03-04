@@ -3,6 +3,10 @@ Pattern matching changelog
 
 ## ?.?.? / ????-??-??
 
+## 9.1.0 / 2022-03-04
+
+* Made compatible with XP 11, see xp-framework/core#300 - @thekid
+
 ## 9.0.0 / 2020-04-11
 
 * Implemented xp-framework/rfc#334: Drop PHP 5.6:
